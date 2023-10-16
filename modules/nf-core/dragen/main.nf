@@ -13,6 +13,19 @@ process DRAGEN {
     output:
     tuple val(meta), path("*.vcf"), emit: vcf, optional: true
     path "versions.yml"           , emit: versions
+    // TODO nf-core: Named file extensions MUST be emitted for ALL output channels
+    tuple val(meta)                , path("*.bam")  , path("*.bai") , emit: bambai
+    path("*.bam.md5sum")           , optional: true
+    tuple val(meta)                , path("*.vcf")  , emit: vcf
+    path("*_coverage_metrics.csv") , optional: true
+    path("*_overall_mean_cov.csv") , optional: true
+    path("*_contig_mean_cov.csv")  , optional: true
+    path("*.insert-stats.tab")     , optional: true
+    path("*.mapping_metrics.csv")  , optional: true
+    path("*.g.vcf.gz")             , optional: true
+    path("*.g.vcf.gz.tbi")         , optional: true
+    // TODO nf-core: List additional required output channels/values here
+    path "versions.yml"            , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
