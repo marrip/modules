@@ -1022,6 +1022,10 @@ diamond/makedb:
   - modules/nf-core/diamond/makedb/**
   - tests/modules/nf-core/diamond/makedb/**
 
+dragen:
+  - modules/nf-core/dragen/**
+  - tests/modules/nf-core/dragen/**
+
 dragmap/align:
   - modules/nf-core/dragmap/align/**
   - tests/modules/nf-core/dragmap/align/**
