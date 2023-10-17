@@ -14,16 +14,22 @@ process DRAGEN {
     tuple val(meta), path("*.vcf"), emit: vcf, optional: true
     path "versions.yml"           , emit: versions
     // TODO nf-core: Named file extensions MUST be emitted for ALL output channels
-    tuple val(meta)                , path("*.bam")  , path("*.bai") , emit: bambai
-    path("*.bam.md5sum")           , optional: true
-    tuple val(meta)                , path("*.vcf")  , emit: vcf
-    path("*_coverage_metrics.csv") , optional: true
-    path("*_overall_mean_cov.csv") , optional: true
-    path("*_contig_mean_cov.csv")  , optional: true
-    path("*.insert-stats.tab")     , optional: true
-    path("*.mapping_metrics.csv")  , optional: true
-    path("*.g.vcf.gz")             , optional: true
-    path("*.g.vcf.gz.tbi")         , optional: true
+    tuple val(meta) , path("*.bam")                                 , optional: true , emit: bam
+    tuple val(meta) , path("*.bai")                                 , optional: true , emit: bai
+    tuple val(meta) , path("*.bam.md5sum")                          , optional: true , emit: bam_md5
+    tuple val(meta) , path("${prefix}.vcf.gz")                      , optional: true , emit: vcf_gzip
+    tuple val(meta) , path("${prefix}.vcf.gz.tbi")                  , optional: true , emit: vcf_gzip_tbi
+    tuple val(meta) , path("${prefix}.vcf.gz.md5sum")               , optional: true , emit: vcf_gzip_md5
+    tuple val(meta) , path("${prefix}.hard-filtered.vcf.gz")        , optional: true , emit: hard_filtered_vcf_gzip
+    tuple val(meta) , path("${prefix}.hard-filtered.vcf.gz.tbi")    , optional: true , emit: hard_filtered_vcf_gzip_tbi
+    tuple val(meta) , path("${prefix}.hard-filtered.vcf.gz.md5sum") , optional: true , emit: hard_filtered_vcf_gzip_md5
+    tuple val(meta) , path("*_coverage_metrics.csv")                , optional: true , emit: coverage_metrics
+    tuple val(meta) , path("*_overall_mean_cov.csv")                , optional: true , emit: overall_mean_cov
+    tuple val(meta) , path("*_contig_mean_cov.csv")                 , optional: true , emit: contig_mean_cov
+    tuple val(meta) , path("*.insert-stats.tab")                    , optional: true , emit: insert_stats
+    tuple val(meta) , path("*.mapping_metrics.csv")                 , optional: true , emit: mapping_metrics
+    tuple val(meta) , path("*.g.vcf.gz")                            , optional: true , emit: gvcf_gzip
+    tuple val(meta) , path("*.g.vcf.gz.tbi")                        , optional: true , emit: gvcf_gzip_§tbi
     // TODO nf-core: List additional required output channels/values here
     path "versions.yml"            , emit: versions
 
